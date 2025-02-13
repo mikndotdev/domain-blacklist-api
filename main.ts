@@ -8,7 +8,8 @@ const app = new Elysia()
 app.get('/', (req) => {
   const url = req.query.url
     if (!url) return new Response('No URL provided', { status: 400 });
-    if (blacklist.includes(url)) return new Response('URL is blacklisted', { status: 403 });
+    const domain = new URL(url).hostname;
+    if (blacklist.includes(domain)) return new Response('URL is blacklisted', { status: 403 });
     return new Response('URL is not blacklisted', { status: 200 });
 });
 
