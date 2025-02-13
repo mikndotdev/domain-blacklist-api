@@ -24,7 +24,8 @@ COPY . .
 # copy production dependencies and source code into final image
 FROM base AS release
 COPY --from=install /temp/prod/node_modules node_modules
-COPY --from=prerelease /usr/src/app/index.ts .
+COPY --from=prerelease /usr/src/app/main.ts .
+COPY --from=prerelease /usr/src/app/blacklist.txt .
 COPY --from=prerelease /usr/src/app/package.json .
 
 # run the app
